@@ -1,0 +1,43 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Students</title><link rel="stylesheet" href="admin.css"><style>.box input,.box select{padding:10px;margin:5px;border:1px solid #ccc;border-radius:5px}.table{width:100%;border-collapse:collapse;background:white}.table th,.table td{padding:10px;border-bottom:1px solid #eee;text-align:left}.danger{background:#c62828;color:#fff;border:0;padding:6px 9px;border-radius:5px}.edit{background:#eee;border:0;padding:6px 9px;border-radius:5px}</style>  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="theme-color" content="#144678">
+</head><body><header><div><h1>Students</h1><p>Manage students</p></div><button onclick="logout()">Logout</button></header><nav id="adminNav"><button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="adminNavLinks">☰ Menu</button><div class="nav-links" id="adminNavLinks"><a href="admin.html">Dashboard</a><a href="students.html">Students</a><a href="mark.html">Mark Attendance</a><a href="records.html">Records</a><a href="reports.html">Reports</a><a href="settings.html">Settings</a></div></nav><main><div class="box"><h3>Add Student</h3><input id="roll" placeholder="Roll No."><input id="name" placeholder="Student Name"><select id="type"><option>Regular</option><option>Lateral</option></select><button class="btn" id="addBtn">Add Student</button><button class="btn" id="importBtn">Import 150 Students</button><p id="msg"></p></div><div class="box"><input id="search" placeholder="Search name or roll"></div><div style="overflow:auto"><table class="table"><thead><tr><th>Roll No.</th><th>Name</th><th>Type</th><th>Action</th></tr></thead><tbody id="body"></tbody></table></div></main><script type="module">
+import {requireAdmin,signOut,auth,db,collection,getDocs,addDoc,updateDoc,deleteDoc,doc,writeBatch,firebaseErrorMessage} from './firebase.js';
+let list=[];await requireAdmin();const body=document.getElementById('body'),msg=document.getElementById('msg');
+async function load(){const s=await getDocs(collection(db,'students'));list=s.docs.map(d=>({id:d.id,...d.data()}));render()}function render(){const q=document.getElementById('search').value.toLowerCase();body.innerHTML=list.filter(x=>(x.name+x.rollNo).toLowerCase().includes(q)).sort((a,b)=>String(a.rollNo).localeCompare(String(b.rollNo),undefined,{numeric:true})).map(x=>`<tr><td>${x.rollNo||''}</td><td>${x.name||''}</td><td>${x.type||''}</td><td><button class="edit" onclick="editS('${x.id}')">Edit</button> <button class="danger" onclick="removeS('${x.id}')">Remove</button></td></tr>`).join('')||'<tr><td colspan="4">No students</td></tr>'}
+document.getElementById('search').oninput=render;
+document.getElementById('addBtn').onclick=async()=>{
+  try{
+    const rollInput=document.getElementById('roll');
+    const nameInput=document.getElementById('name');
+    const typeInput=document.getElementById('type');
+
+    const rollNo=rollInput.value.trim();
+    const studentName=nameInput.value.trim();
+    const studentType=typeInput.value;
+
+    if(!rollNo || !studentName){
+      throw new Error('Roll No and Name required');
+    }
+
+    await addDoc(collection(db,'students'),{
+      rollNo: rollNo,
+      name: studentName,
+      type: studentType,
+      createdAt: new Date().toISOString()
+    });
+
+    rollInput.value='';
+    nameInput.value='';
+    msg.textContent='Student added.';
+    await load();
+  }catch(e){
+    console.error('Add student error:',e);
+    msg.textContent=firebaseErrorMessage(e);
+  }
+};
+window.editS=async id=>{const s=list.find(x=>x.id===id);const n=prompt('Student Name',s.name);if(n===null)return;const r=prompt('Roll No.',s.rollNo);if(r===null)return;const t=confirm('OK = Lateral, Cancel = Regular')?'Lateral':'Regular';await updateDoc(doc(db,'students',id),{name:n.trim(),rollNo:r.trim(),type:t});await load()};window.removeS=async id=>{if(!confirm('Remove this student?'))return;await deleteDoc(doc(db,'students',id));list=list.filter(x=>x.id!==id);render()};
+document.getElementById('importBtn').onclick=async()=>{try{msg.textContent='Checking existing students...';const data=await fetch('data/students.json').then(async r=>{if(!r.ok)throw new Error('Could not load students.json');return r.json()});if(!Array.isArray(data)||data.length!==150)throw new Error('The student data file is invalid.');const existing=await getDocs(collection(db,'students'));const existingRolls=new Set();existing.forEach(d=>{const r=d.data().rollNo;if(r!==undefined&&r!==null)existingRolls.add(String(r).trim())});const missing=data.filter(s=>!existingRolls.has(String(s.rollNo).trim()));if(!missing.length){msg.textContent='All 150 students are already imported.';await load();return}if(!confirm(`Import ${missing.length} missing student(s) from the 150-student list?`))return;msg.textContent=`Importing ${missing.length} students...`;let imported=0;for(let start=0;start<missing.length;start+=450){const chunk=missing.slice(start,start+450);const batch=writeBatch(db);for(const s of chunk){const ref=doc(collection(db,'students'));batch.set(ref,{rollNo:String(s.rollNo).trim(),name:String(s.name||'').trim(),type:s.type==='Lateral'?'Lateral':'Regular',createdAt:new Date().toISOString()});}await batch.commit();imported+=chunk.length;msg.textContent=`Imported ${imported}/${missing.length} students...`}msg.textContent=`Import complete. ${imported} new student(s) imported.`;await load()}catch(e){console.error('Import error:',e);msg.textContent=firebaseErrorMessage(e)}};window.logout=async()=>{await signOut(auth);location.href='login.html'};load();
+</script><script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});</script>
+<script src="admin-nav.js"></script></body></html>

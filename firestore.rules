@@ -1,0 +1,56 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function profile() { return get(/databases/$(database)/documents/users/$(request.auth.uid)); }
+    function isRootAdmin() {
+      return signedIn() && request.auth.token.email != null
+        && request.auth.token.email.lower() == 'ddu@gmail.com';
+    }
+    function isAdmin() { return isRootAdmin() || (signedIn() && profile().data.role == 'admin'); }
+    function isTeacher() { return signedIn() && profile().data.role == 'teacher'; }
+    function isStudent() { return signedIn() && profile().data.role == 'student'; }
+    function isStaff() { return isAdmin() || isTeacher(); }
+
+    match /users/{uid} {
+      // Students may create only their own student profile.
+      allow create: if signedIn() && request.auth.uid == uid
+        && request.resource.data.role == 'student';
+
+      // Only the primary/root admin can create or delete user profiles.
+      // This is especially important for creating/removing admin profiles.
+      allow create: if isRootAdmin();
+      allow delete: if isRootAdmin();
+
+      // Root can manage profiles. Other users may only update their own
+      // profile without changing its role.
+      allow update: if isRootAdmin()
+        || (signedIn() && request.auth.uid == uid
+            && request.resource.data.role == resource.data.role);
+
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+    }
+
+    match /students/{studentId} {
+      allow read: if isStaff();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /settings/{settingId} {
+      allow read: if isStaff();
+      allow write: if isAdmin();
+    }
+
+    match /attendance/{attendanceId} {
+      allow read: if isStaff();
+      allow read: if isStudent() && resource.data.studentUid == request.auth.uid;
+      allow create, update, delete: if isStaff();
+    }
+
+    // Compact per-subject attendance aggregates used by staff reports.
+    // Students do not need direct access to these documents.
+    match /attendanceSummary/{subjectId} {
+      allow read, write: if isStaff();
+    }
+  }
+}

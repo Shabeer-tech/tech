@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Build Attendance Summaries</title><link rel="stylesheet" href="admin.css"><style>.box{max-width:800px;margin:30px auto}.warn{padding:12px;background:#fff3cd;border-radius:8px}</style></head><body><header><div><h1>Build Attendance Summaries</h1><p>One-time migration for low-read reports</p></div></header><main><div class="box"><p class="warn"><b>Important:</b> Run this only once after deploying the optimized version. It reads the existing attendance collection once and creates one compact summary document per subject.</p><button class="btn" id="build">Build / Rebuild Summaries</button><p id="msg"></p></div></main>
+<script type="module">
+import {requireAdmin,db,collection,getDocs,doc,setDoc,writeBatch,serverTimestamp} from './firebase.js';
+await requireAdmin();
+const btn=document.getElementById('build'),msg=document.getElementById('msg');
+btn.onclick=async()=>{
+ if(!confirm('Run the one-time summary rebuild? This reads all existing attendance records.'))return;
+ btn.disabled=true;msg.textContent='Reading attendance once...';
+ try{
+  const snap=await getDocs(collection(db,'attendance'));
+  const by={};
+  snap.forEach(d=>{const a=d.data();if(a._replaced||!a.subject||!a.studentId)return;const subject=String(a.subject);by[subject]??={};const id=String(a.studentId);by[subject][id]??={classes:0,present:0};by[subject][id].classes++;if(a.status==='Present')by[subject][id].present++;});
+  const subjects=Object.keys(by);let done=0;
+  for(const subject of subjects){await setDoc(doc(db,'attendanceSummary',encodeURIComponent(subject)),{students:by[subject],rebuiltAt:serverTimestamp()},{merge:false});done++;msg.textContent=`Built ${done}/${subjects.length} subjects...`;}
+  msg.textContent=`Done. Read ${snap.size} attendance records once and built ${subjects.length} summaries.`;
+ }catch(e){console.error(e);msg.textContent=e?.message||'Build failed.'}finally{btn.disabled=false}
+};
+</script></body></html>

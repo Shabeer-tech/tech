@@ -1,0 +1,38 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "attendance",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "date", "order": "ASCENDING"},
+        {"fieldPath": "subject", "order": "ASCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "attendance",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "studentId", "order": "ASCENDING"},
+        {"fieldPath": "subject", "order": "ASCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "attendance",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "studentId", "order": "ASCENDING"},
+        {"fieldPath": "status", "order": "ASCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "attendance",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "studentId", "order": "ASCENDING"},
+        {"fieldPath": "subject", "order": "ASCENDING"},
+        {"fieldPath": "status", "order": "ASCENDING"}
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

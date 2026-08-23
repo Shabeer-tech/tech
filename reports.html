@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Reports</title><link rel="stylesheet" href="admin.css"><style>.table{width:100%;border-collapse:collapse;background:#fff}.table th,.table td{padding:10px;border-bottom:1px solid #eee;text-align:left}select,input{padding:10px;border:1px solid #ccc;border-radius:5px}.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.logo-preview{height:42px;vertical-align:middle;margin-right:8px}</style>  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="theme-color" content="#144678">
+</head><body><header><div><h1>Attendance Reports</h1><p>Student-wise subject report</p></div><button onclick="logout()">Logout</button></header><nav id="adminNav"><button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="adminNavLinks">☰ Menu</button><div class="nav-links" id="adminNavLinks"><a href="admin.html">Dashboard</a><a href="students.html">Students</a><a href="mark.html">Mark Attendance</a><a href="records.html">Records</a><a href="reports.html">Reports</a><a href="settings.html">Settings</a></div></nav><main><div class="box"><div class="tools"><label>Subject: <select id="subject"></select></label><button class="btn" id="loadReportBtn">Load Report</button><button class="btn" id="downloadPdf">Download PDF</button><button class="btn" id="downloadCsv">Download CSV</button></div></div><div class="box" style="overflow:auto"><table class="table"><thead><tr><th>Roll</th><th>Student</th><th>Type</th><th>Classes</th><th>Present</th><th>Absent</th><th>%</th></tr></thead><tbody id="body"></tbody></table></div></main><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script><script type="module">
+import {requireStaff,signOut,auth,db,collection,getDocs,doc,getDoc,query,where} from './firebase.js';
+import {loadSubjects,safeText} from './attendance-utils.js';
+let ss=[],rows=[],subjects=[];await requireStaff();
+const subjectEl=document.getElementById('subject'),body=document.getElementById('body');
+async function loadStudents(){let c=null;try{c=JSON.parse(localStorage.getItem('attendance_students_v2')||'null')}catch(_){};if(c&&c.ts&&Date.now()-c.ts<30*60*1000&&Array.isArray(c.data))ss=c.data;else{ss=(await getDocs(collection(db,'students'))).docs.map(d=>({id:d.id,...d.data()}));try{localStorage.setItem('attendance_students_v2',JSON.stringify({ts:Date.now(),data:ss}))}catch(_){} }ss=ss.slice().sort((a,b)=>String(a.rollNo??'').localeCompare(String(b.rollNo??''),undefined,{numeric:true,sensitivity:'base'}));}
+async function load(){try{subjects=await loadSubjects(db,collection,doc,getDoc);subjectEl.innerHTML='<option value="">All Subjects</option>'+subjects.map(s=>`<option value="${safeText(s)}">${safeText(s)}</option>`).join('');}catch(e){body.innerHTML=`<tr><td colspan="7">${safeText(e?.message||'Could not load report.')}</td></tr>`}}
+async function loadReport(){
+ body.innerHTML='<tr><td colspan="7">Loading report...</td></tr>';
+ const selected=subjectEl.value;
+ try{
+   await loadStudents();
+   // One summary document per subject instead of 2 queries per student.
+   const wanted=selected?[selected]:subjects;
+   const snaps=await Promise.all(wanted.map(s=>getDoc(doc(db,'attendanceSummary',encodeURIComponent(s)))));
+   const totals={};
+   snaps.forEach((snap,i)=>{
+     if(!snap.exists()) return;
+     const students=snap.data().students||{};
+     Object.entries(students).forEach(([id,v])=>{
+       if(!totals[id]) totals[id]={classes:0,present:0};
+       totals[id].classes+=Number(v.classes||0);
+       totals[id].present+=Number(v.present||0);
+     });
+   });
+   rows=ss.map(s=>{
+     const v=totals[s.id]||{classes:0,present:0};
+     const classes=v.classes,present=v.present,absent=Math.max(0,classes-present);
+     return {roll:s.rollNo||'',name:s.name||'',type:s.type||'',classes,present,absent,pct:classes?Math.round(present/classes*100):0};
+   });
+   render();
+ }catch(e){body.innerHTML=`<tr><td colspan="7">${safeText(e?.message||'Could not load report.')}</td></tr>`}
+}
+function render(){body.innerHTML=rows.map(r=>`<tr><td>${safeText(r.roll)}</td><td>${safeText(r.name)}</td><td>${safeText(r.type)}</td><td>${r.classes}</td><td>${r.present}</td><td>${r.absent}</td><td>${r.pct}%</td></tr>`).join('')||'<tr><td colspan="7">No students/attendance</td></tr>'}
+document.getElementById('loadReportBtn').onclick=loadReport;subjectEl.onchange=loadReport;
+downloadCsv.onclick=()=>{const esc=v=>'"'+String(v??'').replace(/"/g,'""')+'"';const csv=[['Roll No','Student','Type','Classes','Present','Absent','Percentage'],...rows.map(r=>[r.roll,r.name,r.type,r.classes,r.present,r.absent,r.pct+'%'])].map(r=>r.map(esc).join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='attendance-report.csv';a.click();URL.revokeObjectURL(a.href)};
+downloadPdf.onclick=async()=>{try{const {jsPDF}=window.jspdf;const pdf=new jsPDF({orientation:'landscape'});const img=new Image();img.src='logo.png';await new Promise((res,rej)=>{img.onload=res;img.onerror=rej});pdf.addImage(img,'PNG',14,10,55,18);pdf.setFontSize(16);pdf.text('College Attendance Management System',75,18);pdf.setFontSize(11);pdf.text('Attendance Report - '+(subjectEl.value||'All Subjects'),75,25);let y=38;const headers=['Roll','Student','Type','Classes','Present','Absent','%'];const widths=[18,55,30,25,25,25,18];let x=12;pdf.setFontSize(9);headers.forEach((h,i)=>{pdf.text(h,x,y);x+=widths[i]});y+=7;rows.forEach(r=>{if(y>190){pdf.addPage();y=15}x=12;[r.roll,r.name,r.type,r.classes,r.present,r.absent,r.pct+'%'].forEach((v,i)=>{pdf.text(String(v),x,y,{maxWidth:widths[i]-2});x+=widths[i]});y+=6});pdf.save('attendance-report.pdf')}catch(e){alert('PDF download failed. Please check internet connection once and try again.')}};
+window.logout=async()=>{await signOut(auth);location.href='login.html'};load();
+</script></script><script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});</script>
+<script src="admin-nav.js"></script></body></html>

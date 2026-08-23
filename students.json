@@ -1,0 +1,782 @@
+[
+  {
+    "id": 1,
+    "rollNo": "001",
+    "name": "AGRIMA MISHRA",
+    "type": "Regular"
+  },
+  {
+    "id": 2,
+    "rollNo": "002",
+    "name": "AMRITA RAI",
+    "type": "Regular"
+  },
+  {
+    "id": 3,
+    "rollNo": "003",
+    "name": "ANANYA SINGH",
+    "type": "Regular"
+  },
+  {
+    "id": 4,
+    "rollNo": "004",
+    "name": "ANJALI GUPTA",
+    "type": "Regular"
+  },
+  {
+    "id": 5,
+    "rollNo": "005",
+    "name": "ANSHIKA SINGH",
+    "type": "Regular"
+  },
+  {
+    "id": 6,
+    "rollNo": "006",
+    "name": "ANSHIKA SINGH",
+    "type": "Regular"
+  },
+  {
+    "id": 7,
+    "rollNo": "007",
+    "name": "DEEKSHA",
+    "type": "Regular"
+  },
+  {
+    "id": 8,
+    "rollNo": "008",
+    "name": "GARIMA CHAUHAN",
+    "type": "Regular"
+  },
+  {
+    "id": 9,
+    "rollNo": "009",
+    "name": "JYOTI MISHRA",
+    "type": "Regular"
+  },
+  {
+    "id": 10,
+    "rollNo": "010",
+    "name": "KHUSHI CHAUDHARY",
+    "type": "Regular"
+  },
+  {
+    "id": 11,
+    "rollNo": "011",
+    "name": "KRITIKA MISHRA",
+    "type": "Regular"
+  },
+  {
+    "id": 12,
+    "rollNo": "012",
+    "name": "LAKSHMI SINGH",
+    "type": "Regular"
+  },
+  {
+    "id": 13,
+    "rollNo": "013",
+    "name": "MAHIMA",
+    "type": "Regular"
+  },
+  {
+    "id": 14,
+    "rollNo": "014",
+    "name": "NADIYA KHATOON",
+    "type": "Regular"
+  },
+  {
+    "id": 15,
+    "rollNo": "015",
+    "name": "PAYAL NISHAD",
+    "type": "Regular"
+  },
+  {
+    "id": 16,
+    "rollNo": "016",
+    "name": "RIDDHI KESARWANI",
+    "type": "Regular"
+  },
+  {
+    "id": 17,
+    "rollNo": "017",
+    "name": "RITIKA PANDEY",
+    "type": "Regular"
+  },
+  {
+    "id": 18,
+    "rollNo": "018",
+    "name": "ROSHNI GUPTA",
+    "type": "Regular"
+  },
+  {
+    "id": 19,
+    "rollNo": "019",
+    "name": "RUCHI YADAV",
+    "type": "Regular"
+  },
+  {
+    "id": 20,
+    "rollNo": "020",
+    "name": "SAKSHI GOND",
+    "type": "Regular"
+  },
+  {
+    "id": 21,
+    "rollNo": "021",
+    "name": "SALONI SINGH",
+    "type": "Regular"
+  },
+  {
+    "id": 22,
+    "rollNo": "022",
+    "name": "SEJAL YADAV",
+    "type": "Regular"
+  },
+  {
+    "id": 23,
+    "rollNo": "023",
+    "name": "SHREYA SRIVASTAVA",
+    "type": "Regular"
+  },
+  {
+    "id": 24,
+    "rollNo": "024",
+    "name": "SHUBHANGI SINGH",
+    "type": "Regular"
+  },
+  {
+    "id": 25,
+    "rollNo": "025",
+    "name": "SONY KASAUDHAN",
+    "type": "Regular"
+  },
+  {
+    "id": 26,
+    "rollNo": "026",
+    "name": "SUSMITA BIND",
+    "type": "Regular"
+  },
+  {
+    "id": 27,
+    "rollNo": "027",
+    "name": "VANDANA SINGH",
+    "type": "Regular"
+  },
+  {
+    "id": 28,
+    "rollNo": "028",
+    "name": "ABHAY CHAND MAURY",
+    "type": "Regular"
+  },
+  {
+    "id": 29,
+    "rollNo": "029",
+    "name": "ABHAY GAUTAM",
+    "type": "Regular"
+  },
+  {
+    "id": 30,
+    "rollNo": "030",
+    "name": "ABHAY KUMAR VISHWAKARMA",
+    "type": "Regular"
+  },
+  {
+    "id": 31,
+    "rollNo": "031",
+    "name": "ABHAY PRATAP PANDEY",
+    "type": "Regular"
+  },
+  {
+    "id": 32,
+    "rollNo": "032",
+    "name": "ABHISHEK KUMAR YADAV",
+    "type": "Regular"
+  },
+  {
+    "id": 33,
+    "rollNo": "033",
+    "name": "ABHISHEK PAL",
+    "type": "Regular"
+  },
+  {
+    "id": 34,
+    "rollNo": "034",
+    "name": "ABHISHEK YADAV",
+    "type": "Regular"
+  },
+  {
+    "id": 35,
+    "rollNo": "035",
+    "name": "ABHIUDAY PRATAP SINGH",
+    "type": "Regular"
+  },
+  {
+    "id": 36,
+    "rollNo": "036",
+    "name": "ADARSH GUPTA",
+    "type": "Regular"
+  },
+  {
+    "id": 37,
+    "rollNo": "037",
+    "name": "ADITYA",
+    "type": "Regular"
+  },
+  {
+    "id": 38,
+    "rollNo": "038",
+    "name": "ADITYA CHAUDHARI",
+    "type": "Regular"
+  },
+  {
+    "id": 39,
+    "rollNo": "039",
+    "name": "ADITYA PRATAP SINGH",
+    "type": "Regular"
+  },
+  {
+    "id": 40,
+    "rollNo": "040",
+    "name": "ADITYA YADAV",
+    "type": "Regular"
+  },
+  {
+    "id": 41,
+    "rollNo": "041",
+    "name": "AKASH PANDEY",
+    "type": "Regular"
+  },
+  {
+    "id": 42,
+    "rollNo": "042",
+    "name": "AKHILESH KUMAR",
+    "type": "Regular"
+  },
+  {
+    "id": 43,
+    "rollNo": "043",
+    "name": "AKSHIT KUMAR SINGH",
+    "type": "Regular"
+  },
+  {
+    "id": 44,
+    "rollNo": "044",
+    "name": "AKSHIT KUMAR SINGH",
+    "type": "Regular"
+  },
+  {
+    "id": 45,
+    "rollNo": "045",
+    "name": "AMAN KUMAR",
+    "type": "Regular"
+  },
+  {
+    "id": 46,
+    "rollNo": "046",
+    "name": "ANAND KUMAR SINGH",
+    "type": "Regular"
+  },
+  {
+    "id": 47,
+    "rollNo": "047",
+    "name": "ANIKET RAI",
+    "type": "Regular"
+  },
+  {
+    "id": 48,
+    "rollNo": "048",
+    "name": "ANKIT KUMAR",
+    "type": "Regular"
+  },
+  {
+    "id": 49,
+    "rollNo": "049",
+    "name": "ANKIT KUMAR RANJAN",
+    "type": "Regular"
+  },
+  {
+    "id": 50,
+    "rollNo": "050",
+    "name": "ANKIT KUMAR YADAV",
+    "type": "Regular"
+  },
+  {
+    "id": 51,
+    "rollNo": "051",
+    "name": "ANKUSH BARNALA",
+    "type": "Regular"
+  },
+  {
+    "id": 52,
+    "rollNo": "052",
+    "name": "ANSH KUMAR CHAUDHARY",
+    "type": "Regular"
+  },
+  {
+    "id": 53,
+    "rollNo": "053",
+    "name": "ARVIND CHAUDHARY",
+    "type": "Regular"
+  },
+  {
+    "id": 54,
+    "rollNo": "054",
+    "name": "ARYAN NISHAD",
+    "type": "Regular"
+  },
+  {
+    "id": 55,
+    "rollNo": "055",
+    "name": "ARYAN YADAV",
+    "type": "Regular"
+  },
+  {
+    "id": 56,
+    "rollNo": "056",
+    "name": "ASHISH TRIPATHI",
+    "type": "Regular"
+  },
+  {
+    "id": 57,
+    "rollNo": "057",
+    "name": "ASHWANI DEV MISHRA",
+    "type": "Regular"
+  },
+  {
+    "id": 58,
+    "rollNo": "058",
+    "name": "AYUSH KUMAR",
+    "type": "Regular"
+  },
+  {
+    "id": 59,
+    "rollNo": "059",
+    "name": "AYUSH VERMA",
+    "type": "Regular"
+  },
+  {
+    "id": 60,
+    "rollNo": "060",
+    "name": "DEV BHARTI",
+    "type": "Regular"
+  },
+  {
+    "id": 61,
+    "rollNo": "061",
+    "name": "OMYANSH",
+    "type": "Regular"
+  },
+  {
+    "id": 62,
+    "rollNo": "062",
+    "name": "GAURAV KUMAR GUPTA",
+    "type": "Regular"
+  },
+  {
+    "id": 63,
+    "rollNo": "063",
+    "name": "HARIOM DUBEY",
+    "type": "Regular"
+  },
+  {
+    "id": 64,
+    "rollNo": "064",
+    "name": "HARSH YADAV",
+    "type": "Regular"
+  },
+  {
+    "id": 65,
+    "rollNo": "065",
+    "name": "HARSHIT KANNAUJIA",
+    "type": "Regular"
+  },
+  {
+    "id": 66,
+    "rollNo": "066",
+    "name": "HIMANSHU GUPTA",
+    "type": "Regular"
+  },
+  {
+    "id": 67,
+    "rollNo": "067",
+    "name": "HIMANSHU SINGH",
+    "type": "Regular"
+  },
+  {
+    "id": 68,
+    "rollNo": "068",
+    "name": "HITANSHU MISHRA",
+    "type": "Regular"
+  },
+  {
+    "id": 69,
+    "rollNo": "069",
+    "name": "JAGRIT KUMAR",
+    "type": "Regular"
+  },
+  {
+    "id": 70,
+    "rollNo": "070",
+    "name": "JAIKEE BHARTI",
+    "type": "Regular"
+  },
+  {
+    "id": 71,
+    "rollNo": "071",
+    "name": "JAIPRAKASH CHAUHAN",
+    "type": "Regular"
+  },
+  {
+    "id": 72,
+    "rollNo": "072",
+    "name": "MAYANK KUMAR GUPTA",
+    "type": "Regular"
+  },
+  {
+    "id": 73,
+    "rollNo": "073",
+    "name": "NAITIK MISHRA",
+    "type": "Regular"
+  },
+  {
+    "id": 74,
+    "rollNo": "074",
+    "name": "NAVIN SINGH",
+    "type": "Regular"
+  },
+  {
+    "id": 75,
+    "rollNo": "075",
+    "name": "NITIN MAURYA",
+    "type": "Regular"
+  },
+  {
+    "id": 76,
+    "rollNo": "076",
+    "name": "NITISH PRASAD",
+    "type": "Regular"
+  },
+  {
+    "id": 77,
+    "rollNo": "077",
+    "name": "OM ABHISHEK TRIPATHI",
+    "type": "Regular"
+  },
+  {
+    "id": 78,
+    "rollNo": "078",
+    "name": "PANKAJ KUMAR",
+    "type": "Regular"
+  },
+  {
+    "id": 79,
+    "rollNo": "079",
+    "name": "PANKAJ YADAV",
+    "type": "Regular"
+  },
+  {
+    "id": 80,
+    "rollNo": "080",
+    "name": "PRAJWAL",
+    "type": "Regular"
+  },
+  {
+    "id": 81,
+    "rollNo": "081",
+    "name": "PRASHANT",
+    "type": "Regular"
+  },
+  {
+    "id": 82,
+    "rollNo": "082",
+    "name": "PREM YADAV",
+    "type": "Regular"
+  },
+  {
+    "id": 83,
+    "rollNo": "083",
+    "name": "PRINCE GUPTA",
+    "type": "Regular"
+  },
+  {
+    "id": 84,
+    "rollNo": "084",
+    "name": "PRINCE JAISWAL",
+    "type": "Regular"
+  },
+  {
+    "id": 85,
+    "rollNo": "085",
+    "name": "PRINCE TIWARI",
+    "type": "Regular"
+  },
+  {
+    "id": 86,
+    "rollNo": "086",
+    "name": "PRINCE YADAV",
+    "type": "Regular"
+  },
+  {
+    "id": 87,
+    "rollNo": "087",
+    "name": "PRIYANSHU",
+    "type": "Regular"
+  },
+  {
+    "id": 88,
+    "rollNo": "088",
+    "name": "PRIYANSHU",
+    "type": "Regular"
+  },
+  {
+    "id": 89,
+    "rollNo": "089",
+    "name": "RAJ GUPTA",
+    "type": "Regular"
+  },
+  {
+    "id": 90,
+    "rollNo": "090",
+    "name": "RAJKUMAR VERMA",
+    "type": "Regular"
+  },
+  {
+    "id": 91,
+    "rollNo": "091",
+    "name": "RAJNISH PANDEY",
+    "type": "Regular"
+  },
+  {
+    "id": 92,
+    "rollNo": "092",
+    "name": "RAKESH YADAV",
+    "type": "Regular"
+  },
+  {
+    "id": 93,
+    "rollNo": "093",
+    "name": "RAMU KUMAR",
+    "type": "Regular"
+  },
+  {
+    "id": 94,
+    "rollNo": "094",
+    "name": "RAVI KUMAR BIND",
+    "type": "Regular"
+  },
+  {
+    "id": 95,
+    "rollNo": "095",
+    "name": "RISHAB RAJ SRIVASTAVA",
+    "type": "Regular"
+  },
+  {
+    "id": 96,
+    "rollNo": "096",
+    "name": "RITESH PASWAN",
+    "type": "Regular"
+  },
+  {
+    "id": 97,
+    "rollNo": "097",
+    "name": "ROSHAN YADAV",
+    "type": "Regular"
+  },
+  {
+    "id": 98,
+    "rollNo": "098",
+    "name": "SACHIN SINGH",
+    "type": "Regular"
+  },
+  {
+    "id": 99,
+    "rollNo": "099",
+    "name": "SAHIL SONKAR",
+    "type": "Regular"
+  },
+  {
+    "id": 100,
+    "rollNo": "100",
+    "name": "SARVESH KUMAR",
+    "type": "Regular"
+  },
+  {
+    "id": 101,
+    "rollNo": "101",
+    "name": "SATYA KUMAR NISHAD",
+    "type": "Regular"
+  },
+  {
+    "id": 102,
+    "rollNo": "102",
+    "name": "SATYA PRAKASH GUPTA",
+    "type": "Regular"
+  },
+  {
+    "id": 103,
+    "rollNo": "103",
+    "name": "SATYAM MANI TRIPATHI",
+    "type": "Regular"
+  },
+  {
+    "id": 104,
+    "rollNo": "104",
+    "name": "SHABEER ALI",
+    "type": "Regular"
+  },
+  {
+    "id": 105,
+    "rollNo": "105",
+    "name": "SHASHANK SHUKLA",
+    "type": "Regular"
+  },
+  {
+    "id": 106,
+    "rollNo": "106",
+    "name": "SHASHWAT GUJRATI",
+    "type": "Regular"
+  },
+  {
+    "id": 107,
+    "rollNo": "107",
+    "name": "SHIVAM MAURYA",
+    "type": "Regular"
+  },
+  {
+    "id": 108,
+    "rollNo": "108",
+    "name": "SHIVAM UPADHYAY",
+    "type": "Regular"
+  },
+  {
+    "id": 109,
+    "rollNo": "109",
+    "name": "SHIVANGI GIRI",
+    "type": "Regular"
+  },
+  {
+    "id": 110,
+    "rollNo": "110",
+    "name": "SHIVANSH TIWARI",
+    "type": "Regular"
+  },
+  {
+    "id": 111,
+    "rollNo": "111",
+    "name": "SHUBHAM YADAV",
+    "type": "Lateral"
+  },
+  {
+    "id": 112,
+    "rollNo": "112",
+    "name": "SIDDHARTH BHARTI",
+    "type": "Lateral"
+  },
+  {
+    "id": 113,
+    "rollNo": "113",
+    "name": "UDAY PRATAP SINGH",
+    "type": "Lateral"
+  },
+  {
+    "id": 114,
+    "rollNo": "114",
+    "name": "UTKARSH KUMAR",
+    "type": "Lateral"
+  },
+  {
+    "id": 115,
+    "rollNo": "115",
+    "name": "VAIBHAV MISHRA",
+    "type": "Lateral"
+  },
+  {
+    "id": 116,
+    "rollNo": "116",
+    "name": "VIKASH VISHWAKARMA",
+    "type": "Lateral"
+  },
+  {
+    "id": 117,
+    "rollNo": "117",
+    "name": "VINAY KUMAR",
+    "type": "Lateral"
+  },
+  {
+    "id": 118,
+    "rollNo": "118",
+    "name": "VIRAT KUMAR KUSHWAHA",
+    "type": "Lateral"
+  },
+  {
+    "id": 119,
+    "rollNo": "119",
+    "name": "Lateral Student 119",
+    "type": "Lateral"
+  },
+  {
+    "id": 120,
+    "rollNo": "120",
+    "name": "Lateral Student 120",
+    "type": "Lateral"
+  },
+  {
+    "id": 121,
+    "rollNo": "121",
+    "name": "Lateral Student 121",
+    "type": "Lateral"
+  },
+  {
+    "id": 122,
+    "rollNo": "122",
+    "name": "Lateral Student 122",
+    "type": "Lateral"
+  },
+  {
+    "id": 123,
+    "rollNo": "123",
+    "name": "Lateral Student 123",
+    "type": "Lateral"
+  },
+  {
+    "id": 124,
+    "rollNo": "124",
+    "name": "Lateral Student 124",
+    "type": "Lateral"
+  },
+  {
+    "id": 125,
+    "rollNo": "125",
+    "name": "Lateral Student 125",
+    "type": "Lateral"
+  },
+  {
+    "id": 126,
+    "rollNo": "126",
+    "name": "Lateral Student 126",
+    "type": "Lateral"
+  },
+  {
+    "id": 127,
+    "rollNo": "127",
+    "name": "Lateral Student 127",
+    "type": "Lateral"
+  },
+  {
+    "id": 128,
+    "rollNo": "128",
+    "name": "Lateral Student 128",
+    "type": "Lateral"
+  },
+  {
+    "id": 129,
+    "rollNo": "129",
+    "name": "Lateral Student 129",
+    "type": "Lateral"
+  },
+  {
+    "id": 130,
+    "rollNo": "130",
+    "name": "Lateral Student 130",
+    "type": "Lateral"
+  }
+]

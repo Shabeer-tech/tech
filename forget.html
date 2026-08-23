@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Forgot Password</title><link rel="stylesheet" href="style.css">  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="theme-color" content="#144678">
+</head>
+<body><a href="index.html" class="home-link">Home</a><div class="auth-card"><h2>Forgot Password</h2><p class="muted">Firebase will send a password reset email.</p><form id="form"><label>Email</label><input id="email" type="email" required placeholder="Enter your Gmail"><button class="primary-btn" type="submit">Send Reset Link</button></form><p id="msg" class="message"></p><a class="auth-link" href="login.html">Back to Login</a><p>Don't have an account? <a href="register.html">Register here</a></p></div>
+<script type="module">import {auth,sendPasswordResetEmail,firebaseErrorMessage} from './firebase.js';const form=document.getElementById('form'),msg=document.getElementById('msg');form.addEventListener('submit',async e=>{e.preventDefault();msg.textContent='Sending...';try{await sendPasswordResetEmail(auth,email.value.trim());msg.textContent='Reset email sent. Check your inbox/spam folder.';}catch(err){msg.textContent=firebaseErrorMessage(err);}});</script><script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});</script>
+</body></html>

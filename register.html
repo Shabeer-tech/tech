@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Student Registration - Attendance System</title><link rel="stylesheet" href="style.css">  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="theme-color" content="#144678">
+</head>
+<body>
+<a href="index.html" class="home-link">Home</a>
+<div class="auth-card">
+  <h2>Student Registration</h2>
+  <p class="muted">Create your student account</p>
+  <form id="form">
+    <label>Name</label><input id="nameInput" required placeholder="Full name">
+    <label>Roll No.</label><input id="rollInput" required placeholder="College roll number">
+    <label>Email</label><input id="emailInput" type="email" required placeholder="Enter email">
+    <label>Password</label><input id="passwordInput" type="password" minlength="6" required placeholder="At least 6 characters">
+    <label>Confirm Password</label><input id="confirmInput" type="password" minlength="6" required placeholder="Repeat password">
+    <button class="primary-btn" type="submit">Register as Student</button>
+  </form>
+  <p id="msg" class="message"></p>
+  <p>Admin/Teacher accounts are created by an existing Admin.</p>
+  <p>Already registered? <a href="login.html">Login</a></p>
+</div>
+<script type="module">
+import { auth, db, createUserWithEmailAndPassword, doc, setDoc, signOut, firebaseErrorMessage } from './firebase.js';
+const form=document.getElementById('form'), msg=document.getElementById('msg');
+form.addEventListener('submit',async e=>{
+ e.preventDefault();
+ const name=document.getElementById('nameInput').value.trim();
+ const email=document.getElementById('emailInput').value.trim().toLowerCase();
+ const password=document.getElementById('passwordInput').value;
+ const confirmPassword=document.getElementById('confirmInput').value;
+ const rollNo=document.getElementById('rollInput').value.trim();
+ if(password!==confirmPassword){msg.textContent='Passwords do not match.';return;}
+ if(!rollNo){msg.textContent='Roll No. is required.';return;}
+ msg.textContent='Creating student account...';
+ try{
+   const cred=await createUserWithEmailAndPassword(auth,email,password);
+   await setDoc(doc(db,'users',cred.user.uid),{name,email,role:'student',rollNo,createdAt:new Date().toISOString()});
+   await signOut(auth);
+   form.reset();
+   msg.textContent='Student account created successfully. Please login.';
+ }catch(err){msg.textContent=firebaseErrorMessage(err);}
+});
+</script>
+<script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});</script>
+</body></html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Login - Attendance System</title><link rel="stylesheet" href="style.css">  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="theme-color" content="#144678">
+</head>
+<body>
+<a href="index.html" class="home-link">Home</a>
+<div class="auth-card">
+  <h2>Login</h2>
+  <p class="muted">Login to open your attendance panel</p>
+  <form id="loginForm">
+    <label>Email</label><input id="email" type="email" required placeholder="Enter email">
+    <label>Password</label><input id="password" type="password" required placeholder="Enter password">
+    <button class="primary-btn" type="submit">Login</button>
+  </form>
+  <p id="msg" class="message"></p>
+  <a class="auth-link" href="forget.html">Forgot Password?</a>
+  <p>Don't have an account? <a href="register.html">Register here</a></p>
+</div>
+<script type="module">
+import { auth, signInWithEmailAndPassword, firebaseErrorMessage, currentProfile } from './firebase.js';
+const form=document.getElementById('loginForm'), msg=document.getElementById('msg');
+form.addEventListener('submit', async e=>{
+  e.preventDefault(); msg.textContent='Logging in...';
+  try {
+    const cred = await signInWithEmailAndPassword(auth,email.value.trim(),password.value);
+    const profile=await currentProfile();
+    if(!profile) throw new Error('Login worked, but your Firestore profile is missing.');
+    if(profile.role === 'admin') location.href='admin.html';
+    else if(profile.role === 'teacher') location.href='admin.html';
+    else if(profile.role === 'student') location.href='student.html';
+    else throw new Error('Account role is not configured.');
+  } catch(err) { msg.textContent=firebaseErrorMessage(err); }
+});
+</script>
+<script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});</script>
+</body></html>
